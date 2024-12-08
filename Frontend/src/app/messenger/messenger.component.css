@@ -1,0 +1,21 @@
+.message {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+  
+  .message-positive {
+    background-color: #82dd82; /* Light green */
+    border-color: #0ddc3d;
+  }
+  
+  .message-negative {
+    background-color: #e68f8f; /* Light red */
+    border-color: #e4616e;
+  }
+  
+  .message-neutral {
+    background-color: #81b7ed; /* Light gray */
+    border-color: #598cf3;
+  }
