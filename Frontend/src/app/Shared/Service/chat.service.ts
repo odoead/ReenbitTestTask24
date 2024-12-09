@@ -3,7 +3,7 @@ import {
   HttpTransportType,
   HubConnection,
   HubConnectionBuilder,
-} from '@microsoft/signalR';
+} from '@microsoft/signalr';
 import { Message } from '../Models/message';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
@@ -13,10 +13,9 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class ChatService {
-  private hubConnection!: signalR.HubConnection;
+  private hubConnection!: HubConnection;  
   private messagesSubject = new BehaviorSubject<Message[]>([]);
   public messages$ = this.messagesSubject.asObservable();
-
   constructor(private http: HttpClient) {}
 
   public setupSignalRConnection(): void {
@@ -34,7 +33,7 @@ export class ChatService {
     });
 
     this.hubConnection.start()
-      .catch(err => console.error('SignalR connection error:', err));
+    .catch((err: any) => console.error('SignalR connection error:', err));
   }
 
   public disconectSignalR(): void {
@@ -45,7 +44,7 @@ export class ChatService {
 
   public sendMessage(username: string, message: string): Promise<void> {
     return this.hubConnection.invoke('SendMessage', username, message)
-      .catch(err => console.error(err));
+      .catch((err:any) => console.error(err));
   }
 
   public getStartMessages(): void {
