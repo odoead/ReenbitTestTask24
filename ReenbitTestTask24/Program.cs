@@ -14,7 +14,7 @@ builder.Services.AddDbContext<Context>(options =>
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy", builder =>
-        builder.WithOrigins("http://localhost:4200", "https://nice-desert-053c2e00f.4.azurestaticapps.net/")
+        builder.WithOrigins("http://localhost:4200", "https://lively-stone-0a25e3c0f.4.azurestaticapps.net")
                .AllowAnyMethod()
                .AllowAnyHeader()
                .AllowCredentials());
@@ -44,10 +44,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthorization();
 
-app.MapControllers();
-
 app.UseCors("CorsPolicy");
 
 app.MapHub<MessageHub>("/chatHub");
+
+app.MapControllers();
 
 app.Run();
