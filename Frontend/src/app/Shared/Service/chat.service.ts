@@ -6,7 +6,7 @@ import {
 } from '@microsoft/signalr';
 import { Message } from '../Models/message';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../environments/environment.prod';  
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -53,5 +53,12 @@ export class ChatService {
         next:(messages) => this.messagesSubject.next(messages),
         error:(error) => console.error('Failed to fetch messages:', error)
       });
+  }
+
+  public testApi ():Observable<any>
+  {
+    const api= environment.apiUrl2;
+    return this.http.get<any>(`${api}`)
+
   }
 }

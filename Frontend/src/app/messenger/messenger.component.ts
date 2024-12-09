@@ -16,6 +16,7 @@ export class MessengerComponent implements OnInit,OnDestroy {
   username = '';
   message = '';
 
+  testData:string[]=[];//del
   constructor(private chatService: ChatService) {}
 
   ngOnInit() {
@@ -46,5 +47,15 @@ export class MessengerComponent implements OnInit,OnDestroy {
       case 2: return 'message-negative';
       default: return 'message-neutral';
     }
+  }
+
+
+  getTest(): void {
+    this.chatService.testApi().subscribe({
+      next: (data) => {
+        this.testData = data.facts;
+      } 
+      
+    });
   }
 }
