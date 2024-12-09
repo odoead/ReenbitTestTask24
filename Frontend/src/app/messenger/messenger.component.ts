@@ -16,8 +16,7 @@ export class MessengerComponent implements OnInit,OnDestroy {
   username = '';
   message = '';
 
-  testData:string[]=[];//del
-  constructor(private chatService: ChatService) {}
+   constructor(private chatService: ChatService) {}
 
   ngOnInit() {
     this.chatService.setupSignalRConnection();
@@ -50,12 +49,5 @@ export class MessengerComponent implements OnInit,OnDestroy {
   }
 
 
-  getTest(): void {
-    this.chatService.testApi().subscribe({
-      next: (data) => {
-        this.testData = data.facts;
-      } 
-      
-    });
-  }
+   
 }

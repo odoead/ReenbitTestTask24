@@ -1,11 +1,11 @@
 export interface Message {
-  UserId: string;
-  Username: string;
-  Message: string;
-  Timestamp: Date;
+  userId: string;
+  username: string;
+  message: string;
+  timestamp: string;
   
-  Sentiment: number;
-  PositiveScore: number;
-  NegativeScore: number;
-  NeutralScore: number;
+  sentiment: number;
+  positiveScore: number;
+  negativeScore: number;
+  neutralScore: number;
 }

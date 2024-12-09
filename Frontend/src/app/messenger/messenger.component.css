@@ -1,4 +1,6 @@
 .message {
+  display: flex;
+    flex-direction: column;  
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
@@ -7,15 +9,15 @@
   
   .message-positive {
     background-color: #82dd82; /* Light green */
-    border-color: #0ddc3d;
+    border-color: #07f83f;
   }
   
   .message-negative {
     background-color: #e68f8f; /* Light red */
-    border-color: #e4616e;
+    border-color: #f7061e;
   }
   
   .message-neutral {
     background-color: #81b7ed; /* Light gray */
-    border-color: #598cf3;
+    border-color: #0553f0;
   }

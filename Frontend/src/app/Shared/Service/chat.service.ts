@@ -16,6 +16,7 @@ export class ChatService {
   private hubConnection!: HubConnection;  
   private messagesSubject = new BehaviorSubject<Message[]>([]);
   public messages$ = this.messagesSubject.asObservable();
+  
   constructor(private http: HttpClient) {}
 
   public setupSignalRConnection(): void {
@@ -55,10 +56,5 @@ export class ChatService {
       });
   }
 
-  public testApi ():Observable<any>
-  {
-    const api= environment.apiUrl2;
-    return this.http.get<any>(`${api}/api/facts`)
-
-  }
+   
 }
