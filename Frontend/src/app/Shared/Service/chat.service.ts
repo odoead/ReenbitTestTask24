@@ -58,7 +58,7 @@ export class ChatService {
   public testApi ():Observable<any>
   {
     const api= environment.apiUrl2;
-    return this.http.get<any>(`${api}/api/facts`)
+    return this.http.get<any>(`${api}`)
 
   }
 }
