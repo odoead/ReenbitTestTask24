@@ -8,7 +8,7 @@ using ReenbitTestTask24.Interfaces;
 namespace ReenbitTestTask24.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class MessageController : ControllerBase
     {
         private readonly IMessageService messageService;
