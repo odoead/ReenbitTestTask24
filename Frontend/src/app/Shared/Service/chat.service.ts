@@ -28,7 +28,7 @@ export class ChatService {
       .withAutomaticReconnect()
       .build();
 
-    this.hubConnection.on('ReceiveMessage', (message: Message) => {
+    this.hubConnection.on('Send', (message: Message) => {
       const currentMessages = this.messagesSubject.getValue();
       this.messagesSubject.next([message, ...currentMessages]);
     });
@@ -44,7 +44,7 @@ export class ChatService {
   }
 
   public sendMessage(username: string, message: string): Promise<void> {
-    return this.hubConnection.invoke('SendMessage', username, message)
+    return this.hubConnection.invoke('Send', username, message)
       .catch((err:any) => console.error(err));
   }
 

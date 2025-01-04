@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using ReenbitTestTask24.DB;
+using ReenbitTestTask24.DTO;
 using ReenbitTestTask24.Entities;
 using ReenbitTestTask24.Interfaces;
 using E = Microsoft.AspNetCore.SignalR;
@@ -16,14 +17,14 @@ namespace ReenbitTestTask24.Hub
             this.sentimentService = sentimentService;
         }
 
-        public async Task SendMessage(string username, string message)
+        public async Task Send(string username, string message)
         {
             var chatMessage = new ChatMessage
             {
                 UserId = Context.ConnectionId,
                 Username = username,
                 Message = message,
-                Timestamp = DateTime.UtcNow
+                Timestamp = DateTime.UtcNow,
             };
 
             if (sentimentService != null)
@@ -38,7 +39,20 @@ namespace ReenbitTestTask24.Hub
             dbcontext.ChatMessages.Add(chatMessage);
             await dbcontext.SaveChangesAsync();
 
-            await Clients.All.SendAsync("ReceiveMessage", chatMessage);
+            var sentiment = dbcontext.Sentiments.Where(s => s.ChatMessageId == chatMessage.Id).FirstOrDefault();
+
+            var outputMessage = new MessageDTO
+            {
+                Message = chatMessage.Message,
+                Username = chatMessage.Username,
+                Timestamp = chatMessage.Timestamp,
+                UserId = chatMessage.UserId,
+                NegativeScore = sentiment.NegativeScore ,  
+                NeutralScore = sentiment.NeutralScore,
+                PositiveScore = sentiment.PositiveScore ,
+                Sentiment = (int)sentiment.SentimentType   
+            };
+            await Clients.All.SendAsync("Send", outputMessage);
         }
     }
 }
