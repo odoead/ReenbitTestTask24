@@ -6,7 +6,7 @@ using ReenbitTestTask24.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSignalR().AddAzureSignalR();
+builder.Services.AddSignalR().AddAzureSignalR(o=> o.ConnectionString= "Endpoint=https://reenbittesttask.service.signalr.net;AccessKey=8LEd0D4edv9r2DRoKzQe2qEaSqyWzW8BxcUuBjsgJbSaBfVsehsmJQQJ99ALACYeBjFXJ3w3AAAAASRSwSz6;Version=1.0;");
 
 builder.Services.AddDbContext<Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

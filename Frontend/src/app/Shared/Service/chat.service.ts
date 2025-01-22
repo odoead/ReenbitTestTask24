@@ -21,14 +21,9 @@ export class ChatService {
 
   public setupSignalRConnection(): void {
     this.hubConnection = new  HubConnectionBuilder()
-      .withUrl(`${environment.apiUrl}/chatHub`, {
-        skipNegotiation: true,
-        transport:  HttpTransportType.WebSockets
-      })
-      .withAutomaticReconnect()
-      .build();
+      .withUrl(`${environment.apiUrl}/chathub`).build();
 
-    this.hubConnection.on('Send', (message: Message) => {
+    this.hubConnection.on('send', (message: Message) => {
       const currentMessages = this.messagesSubject.getValue();
       this.messagesSubject.next([message, ...currentMessages]);
     });
@@ -44,7 +39,7 @@ export class ChatService {
   }
 
   public sendMessage(username: string, message: string): Promise<void> {
-    return this.hubConnection.invoke('Send', username, message)
+    return this.hubConnection.invoke('send', username, message)
       .catch((err:any) => console.error(err));
   }
 
