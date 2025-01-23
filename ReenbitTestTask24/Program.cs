@@ -14,7 +14,7 @@ builder.Services.AddDbContext<Context>(options =>
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy", builder =>
-        builder.WithOrigins("http://localhost:4200", "https://lively-stone-0a25e3c0f.4.azurestaticapps.net")
+        builder.AllowAnyOrigin()
                .AllowAnyMethod()
                .AllowAnyHeader()
                .AllowCredentials());
